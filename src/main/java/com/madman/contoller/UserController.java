@@ -29,6 +29,19 @@ public class UserController {
 		// response);
 	}
 
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public void madman2(@PathVariable(value = "id") String id, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		System.out.println(id);
+		System.out.println(request);
+		System.out.println(response);
+		System.out.println("ha ha  hah ");
+		response.sendRedirect("http://photocdn.sohu.com/20160719/Img459923421.jpg");
+		// request.getRequestDispatcher("www.baidu.com").forward(request,
+		// response);
+		// request.getRequestDispatcher("www.baidu.com").forward(request,
+		// response);
+	}
+
 	@RequestMapping(value = "/tt/")
 	public void tt(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("重定向到这里了");
