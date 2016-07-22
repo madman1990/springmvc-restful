@@ -27,4 +27,12 @@
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	<error-page>
+		<error-code>406</error-code>
+		<location>/error/406</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500</location>
+	</error-page>
 </web-app>

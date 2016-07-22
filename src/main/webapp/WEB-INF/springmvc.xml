@@ -11,14 +11,45 @@
 	<context:component-scan base-package="com.madman" />
 	<!-- 开启注解 -->
 	<mvc:annotation-driven />
+	<!-- json转换器 -->
+	<bean id="jacksonMessageConverter"
+		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<property name="supportedMediaTypes" value="application/json;charset=UTF-8" />
 
-	<!-- <bean id="localeResolver" -->
-	<!-- class="org.springframework.web.servlet.i18n.CookieLocaleResolver" /> -->
+	</bean>
+	<!-- string转换 -->
+	<bean id="stringMessageConverter"
+		class="org.springframework.http.converter.StringHttpMessageConverter">
+		<property name="supportedMediaTypes" value="text/plain;charset=UTF-8" />
+	</bean>
+	<!-- xml转换 -->
+	<bean id="xmlMessageConverter"
+		class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+		<property name="supportedMediaTypes" value="application/xml;charset=UTF-8">
+		</property>
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<ref bean="jacksonMessageConverter" />
+				<ref bean="stringMessageConverter" />
+				<ref bean="xmlMessageConverter" />
+				<bean
+					class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+			</list>
+		</property>
+		<property name="synchronizeOnSession" value="true" />
+	</bean>
 
-	<!-- <bean -->
-	<!-- class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
-	<!-- <property name="prefix" value="/" /> -->
-	<!-- <property name="suffix" value=".jsp" /> -->
-	<!-- </bean> -->
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 
 </beans>

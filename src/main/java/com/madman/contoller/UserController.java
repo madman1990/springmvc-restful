@@ -1,6 +1,10 @@
 package com.madman.contoller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,6 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.madman.pojo.Person;
 
 @Controller
 public class UserController {
@@ -23,29 +30,33 @@ public class UserController {
 		System.out.println(response);
 		System.out.println("123");
 		response.sendRedirect("http://photocdn.sohu.com/20160719/Img459923421.jpg");
-		// request.getRequestDispatcher("www.baidu.com").forward(request,
-		// response);
-		// request.getRequestDispatcher("www.baidu.com").forward(request,
-		// response);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public void madman2(@PathVariable(value = "id") String id, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	@RequestMapping(value = "/error/{id}", method = RequestMethod.GET)
+	public String madman2(@PathVariable(value = "id") String id, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		System.out.println(id);
 		System.out.println(request);
 		System.out.println(response);
 		System.out.println("ha ha  hah ");
-		response.sendRedirect("http://photocdn.sohu.com/20160719/Img459923421.jpg");
-		// request.getRequestDispatcher("www.baidu.com").forward(request,
-		// response);
-		// request.getRequestDispatcher("www.baidu.com").forward(request,
-		// response);
+		return id;
 	}
 
-	@RequestMapping(value = "/tt/")
-	public void tt(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("重定向到这里了");
-		response.getWriter().write("  good  game  ");
+	@RequestMapping(value = "/welcome", headers = "Accept=application/json, application/xml")
+	@ResponseBody
+	public Object tt(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println(" 这是要进入到欢迎界面啊  ，，，，，，，");
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<String> list = new ArrayList<String>();
+		list.add("1");
+		list.add("2");
+		list.add("3");
+		list.add("4");
 
+		map.put("name", "madman");
+		map.put("password", "123456");
+		map.put("list", list);
+		Person p = new Person();
+		p.setXxxx("fff");
+		return map;
 	}
 }

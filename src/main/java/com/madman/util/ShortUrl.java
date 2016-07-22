@@ -26,6 +26,8 @@ public class ShortUrl {
 				"Y", "Z"
 
 		};
+		
+		
 		// 对传入网址进行 MD5 加密
 		String hex = md5ByHex(key + url);
 
